@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 
 import {
   createArticleDraft,
-  createWorkEntryDraft,
   setArticleStatus,
   updateArticleDraft,
 } from "@/db/queries";
@@ -17,13 +16,6 @@ export type AdminActionState = { message?: string; error?: string } | undefined;
 
 function field(formData: FormData, name: string) {
   return String(formData.get(name) ?? "").trim();
-}
-
-function listField(formData: FormData, name: string) {
-  return field(formData, name)
-    .split("\n")
-    .map((value) => value.trim())
-    .filter(Boolean);
 }
 
 function topicFieldFromList(names: string[]) {
@@ -51,7 +43,7 @@ function articleInput(formData: FormData) {
   let parsed;
   try {
     parsed = matter(rawContent);
-  } catch (e) {
+  } catch {
     return { error: "Failed to parse Markdown frontmatter." as const };
   }
 
@@ -170,7 +162,7 @@ export async function saveWorkEntry(
   let parsed;
   try {
     parsed = matter(rawContent);
-  } catch (e) {
+  } catch {
     return { error: "Failed to parse Markdown frontmatter." };
   }
 

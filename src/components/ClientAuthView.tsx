@@ -1,18 +1,22 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
 
+const emptySubscribe = () => () => {};
+
 export default function ClientAuthView() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
-
-  useEffect(() => setMounted(true), []);
 
   if (!mounted) return null;
 
