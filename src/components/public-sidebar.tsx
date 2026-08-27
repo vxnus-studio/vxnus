@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { GithubIcon } from "./github-icon";
+import { site } from "@/lib/site";
 
 const navigation = [
   { href: "/", label: "HOME" },
@@ -68,14 +69,14 @@ export function PublicSidebar() {
 
       <div className="sidebar-bottom">
         <a 
-          href="https://github.com/vxnuslabs" 
+          href={site.github.url} 
           target="_blank" 
           rel="noopener noreferrer" 
           className="sidebar-github-link"
-          aria-label="VXNUS on GitHub (vxnuslabs)"
+          aria-label={`VXNUS on GitHub (${site.github.name})`}
         >
           <GithubIcon size={18} />
-          <span>vxnuslabs</span>
+          <span>{site.github.name}</span>
         </a>
         <div className="copyright">
           <div>© VXNUS STUDIO</div>

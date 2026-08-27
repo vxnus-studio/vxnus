@@ -22,7 +22,7 @@ export function PublicFooter() {
             target="_blank"
             rel="noopener noreferrer"
             className="footer-github-link"
-            aria-label="GitHub repository: vxnuslabs"
+            aria-label={`GitHub repository: ${site.github.name}`}
           >
             <GithubIcon size={14} />
             <span>{site.github.name}</span>
