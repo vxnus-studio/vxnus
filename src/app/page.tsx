@@ -91,7 +91,7 @@ export default async function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="github-pill-link"
-                aria-label="GitHub repository: vxnuslabs"
+                aria-label={`GitHub repository: ${site.github.name}`}
               >
                 <GithubIcon size={13} />
                 <span>{site.github.name} ↗</span>

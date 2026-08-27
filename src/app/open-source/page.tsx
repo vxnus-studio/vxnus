@@ -22,7 +22,7 @@ export default async function OpenSourcePage() {
           target="_blank"
           rel="noopener noreferrer"
           className="opensource-github-banner"
-          aria-label="Visit vxnuslabs on GitHub"
+          aria-label={`Visit ${site.github.name} on GitHub`}
         >
           <GithubIcon size={16} />
           <span>{site.github.name} on GitHub ↗</span>

@@ -59,7 +59,7 @@ export default async function AboutPage() {
                 gap: "0.35rem",
                 fontWeight: 500,
               }}
-              aria-label="GitHub repository: vxnuslabs"
+              aria-label={`GitHub repository: ${site.github.name}`}
             >
               <GithubIcon size={15} style={{ display: "inline-block", verticalAlign: "-2px" }} />
               <span>{site.github.name} ↗</span>
