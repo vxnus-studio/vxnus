@@ -72,7 +72,7 @@ export function EntityImage({ entity }: { entity: EntityPreview }) {
       src={entity.image} 
       alt={entity.name} 
       onError={() => setError(true)}
-      className={`w-full h-full p-2 transition-transform duration-500 group-hover:scale-110 drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)] ${entity.kind === "characters" ? "object-contain object-bottom p-0" : "object-contain"}`}
+      className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
     />
   );
 }
@@ -152,16 +152,19 @@ export function EntityExplorer({
   const defaultElementBadge = (element: string | null) => {
     if (!element) return null;
     const el = element.toLowerCase();
-    const props = { size: 16, strokeWidth: 2.5, className: "text-white drop-shadow-md" };
+    const props = { size: 14, strokeWidth: 2.5, className: "drop-shadow-sm" };
     
-    if (el.includes("pyro")) return <Flame {...props} color="#ff5a5a" />;
-    if (el.includes("hydro")) return <Droplets {...props} color="#45b6ff" />;
-    if (el.includes("anemo")) return <Wind {...props} color="#5ceda1" />;
-    if (el.includes("electro")) return <Zap {...props} color="#c65df5" />;
-    if (el.includes("cryo")) return <Snowflake {...props} color="#99ffff" />;
+    // Genshin + Star Rail element matches
+    if (el.includes("pyro") || el === "fire") return <Flame {...props} color="#ff5a5a" />;
+    if (el.includes("hydro") || el === "water") return <Droplets {...props} color="#45b6ff" />;
+    if (el.includes("anemo") || el === "wind") return <Wind {...props} color="#5ceda1" />;
+    if (el.includes("electro") || el.includes("lightning") || el.includes("thunder")) return <Zap {...props} color="#c65df5" />;
+    if (el.includes("cryo") || el === "ice") return <Snowflake {...props} color="#99ffff" />;
     if (el.includes("dendro")) return <Leaf {...props} color="#85cc33" />;
-    if (el.includes("geo")) return <Mountain {...props} color="#ffb13b" />;
-    return <HelpCircle {...props} />;
+    if (el.includes("geo") || el === "physical") return <Mountain {...props} color="#ffb13b" />;
+    if (el.includes("quantum")) return <Zap {...props} color="#6375f0" />;
+    if (el.includes("imaginary")) return <Star {...props} color="#f5c842" />;
+    return <HelpCircle {...props} color="#ffffff" />;
   };
 
   const getBadge = renderElementBadge ?? defaultElementBadge;
@@ -240,12 +243,12 @@ export function EntityExplorer({
                   borderBottom: `4px solid ${rarityColor}` 
                 }}
               >
-                <div className="absolute inset-0 z-0 bg-[var(--surface)] transition-transform duration-500 ease-out group-hover:scale-110 flex items-end justify-center">
+                <div className="absolute inset-0 z-0 bg-[var(--surface)] transition-transform duration-500 ease-out group-hover:scale-110 flex items-center justify-center">
                   {entity.image ? (
                     <img 
                       src={entity.image} 
                       alt={entity.name} 
-                      className="w-full h-full object-contain object-bottom"
+                      className="w-full h-full object-cover object-center"
                       onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} 
                     />
                   ) : (
@@ -277,60 +280,35 @@ export function EntityExplorer({
 
           const detailHref = getDetailHref
             ? getDetailHref(entity)
-            : entity.kind === "characters" 
-              ? `/characters/${entity.slug}`
-              : `/database/${entity.kind}/${entity.slug}`;
+            : `/database/${entity.kind}/${entity.slug}`;
 
           return (
             <Link 
               href={detailHref}
-              className="group flex flex-col rounded-xl overflow-hidden bg-[var(--surface-sunken)] border border-white/5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)] cursor-pointer h-64 sm:h-72" 
+              className="entity-card group" 
               key={`${entity.kind}:${entity.id}`}
-              style={{ borderBottom: `4px solid ${rarityColor}` }}
             >
-              {/* Image Area (Top ~75%) */}
-              <div className="relative flex-1 bg-[var(--surface)] overflow-hidden flex items-center justify-center p-2">
-                {/* Subtle Glow based on rarity */}
-                <div 
-                  className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-500"
-                  style={{ background: `radial-gradient(circle at center, ${rarityColor} 0%, transparent 70%)` }}
-                />
+              <span className="entity-card-mark relative">
+                {entity.image ? (
+                  <img 
+                    src={entity.image} 
+                    alt={entity.name} 
+                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} 
+                  />
+                ) : (
+                  <span>{entity.name.slice(0, 2).toUpperCase()}</span>
+                )}
                 
-                <div className="relative w-full h-full transition-transform duration-500 ease-out group-hover:scale-110 flex items-center justify-center z-10">
-                  <EntityImage entity={entity} />
-                </div>
-                
-                {/* Top-Right Element/Type Badge */}
+                {/* Element Badge */}
                 {ElementIcon && (
-                  <div className="absolute top-2 right-2 z-20 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/50 flex items-center justify-center backdrop-blur-md border border-white/10 shadow-sm" title={entity.element!}>
+                  <div className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/50 flex items-center justify-center backdrop-blur-md border border-white/10 shadow-sm" title={entity.element!}>
                     {ElementIcon}
                   </div>
                 )}
+              </span>
 
-                {/* Top-Left Category Pill */}
-                <div className="absolute top-2 left-2 z-20 px-2 py-0.5 rounded bg-black/60 backdrop-blur-md border border-white/5 text-xs text-white/80 font-bold uppercase tracking-widest shadow-sm">
-                  {kindLabels[entity.kind] ?? entity.kind}
-                </div>
-              </div>
-              
-              {/* Text Area (Bottom ~25%) */}
-              <div className="relative z-20 bg-gradient-to-b from-[var(--surface-sunken)] to-[var(--surface-raised)] border-t border-white/5 p-3 flex flex-col justify-center h-[76px] sm:h-[84px] shrink-0">
-                {/* Rarity Stars */}
-                {entity.rarity && (
-                  <div className="flex gap-0.5 mb-1 opacity-90 justify-center">
-                    {Array.from({ length: Math.min(entity.rarity, 5) }).map((_, i) => (
-                      <Star key={i} size={10} fill="#ffc83d" color="#ffc83d" className="drop-shadow-sm" />
-                    ))}
-                  </div>
-                )}
-                
-                {/* Name (Clamped to 2 lines) */}
-                <h2 
-                  className="text-white font-bold text-center text-xs sm:text-sm leading-snug line-clamp-2 drop-shadow-sm group-hover:text-[var(--accent)] transition-colors"
-                  title={entity.name}
-                >
-                  {entity.name}
-                </h2>
+              <div className="entity-card-info">
+                <h2>{entity.name}</h2>
               </div>
             </Link>
           );

@@ -1,0 +1,233 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { Layers, Sparkles, Sword } from "lucide-react";
+import type { AscensionPhase, MaterialItem, TalentLevel } from "../types";
+
+export interface ProgressionCalculatorProps {
+  ascensionPhases: AscensionPhase[];
+  totalAscensionMaterials: MaterialItem[];
+  talentLevels?: TalentLevel[];
+  totalTalentMaterials?: MaterialItem[];
+  titlePrefix?: string;
+  maxAscensionLevel?: string;
+  materialHrefPrefix?: string;
+}
+
+export function ProgressionCalculator({
+  ascensionPhases,
+  totalAscensionMaterials,
+  talentLevels = [],
+  totalTalentMaterials = [],
+  titlePrefix = "Character",
+  maxAscensionLevel = "80",
+  materialHrefPrefix = "/database/materials",
+}: ProgressionCalculatorProps) {
+  const hasTalents = talentLevels.length > 0 && totalTalentMaterials.length > 0;
+  const [activeTab, setActiveTab] = useState<"ascension" | "talents">("ascension");
+  const [selectedAscPhase, setSelectedAscPhase] = useState<number | "all">("all");
+  const [selectedTalentLevel, setSelectedTalentLevel] = useState<number | "all">("all");
+
+  const displayedAscMaterials =
+    selectedAscPhase === "all"
+      ? totalAscensionMaterials
+      : ascensionPhases.find((p) => p.phase === selectedAscPhase)?.materials ?? [];
+
+  const displayedTalentMaterials =
+    selectedTalentLevel === "all"
+      ? totalTalentMaterials
+      : talentLevels.find((t) => t.level === selectedTalentLevel)?.materials ?? [];
+
+  return (
+    <div className="bg-[var(--surface-sunken)] border border-white/10 rounded-2xl p-5 md:p-6 mb-8 shadow-xl">
+      {/* Tabs Header */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4 mb-6">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setActiveTab("ascension")}
+            className={`px-4 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2 cursor-pointer ${
+              activeTab === "ascension"
+                ? "bg-[var(--green)] text-[#0a110f] shadow-[0_0_15px_rgba(98,213,163,0.3)] font-extrabold"
+                : "bg-[var(--surface-raised)] text-[var(--text-muted)] hover:text-white"
+            }`}
+          >
+            <Layers size={15} /> {titlePrefix} Ascension (Lvl 1 → {maxAscensionLevel})
+          </button>
+          {hasTalents && (
+            <button
+              onClick={() => setActiveTab("talents")}
+              className={`px-4 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                activeTab === "talents"
+                  ? "bg-[var(--green)] text-[#0a110f] shadow-[0_0_15px_rgba(98,213,163,0.3)] font-extrabold"
+                  : "bg-[var(--surface-raised)] text-[var(--text-muted)] hover:text-white"
+              }`}
+            >
+              <Sword size={15} /> Talent Progression (Lvl 1 → 10)
+            </button>
+          )}
+        </div>
+
+        <div className="text-xs text-[var(--text-muted)] flex items-center gap-1 font-mono">
+          <Sparkles size={13} className="text-[var(--accent)]" /> Exact Farming Target
+        </div>
+      </div>
+
+      {activeTab === "ascension" || !hasTalents ? (
+        <div>
+          {/* Phase Selector Pills */}
+          <div className="flex flex-wrap items-center gap-2 mb-6">
+            <span className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mr-1">
+              Select Phase:
+            </span>
+            <button
+              onClick={() => setSelectedAscPhase("all")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                selectedAscPhase === "all"
+                  ? "bg-[var(--green)] text-[#0a110f] font-bold shadow-[0_0_12px_rgba(98,213,163,0.25)]"
+                  : "bg-[var(--surface-raised)] text-[var(--text-2)] hover:text-white hover:border-white/20 border border-white/5"
+              }`}
+            >
+              Total (Lvl 1 → {maxAscensionLevel})
+            </button>
+            {ascensionPhases.map((phase) => (
+              <button
+                key={phase.phase}
+                onClick={() => setSelectedAscPhase(phase.phase)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                  selectedAscPhase === phase.phase
+                    ? "bg-[var(--green)] text-[#0a110f] font-bold shadow-[0_0_12px_rgba(98,213,163,0.25)]"
+                    : "bg-[var(--surface-raised)] text-[var(--text-2)] hover:text-white hover:border-white/20 border border-white/5"
+                }`}
+              >
+                Phase {phase.phase} ({phase.levelRange})
+              </button>
+            ))}
+          </div>
+
+          {/* Material Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+            {displayedAscMaterials.map((mat) => (
+              <Link
+                href={`${materialHrefPrefix}/${mat.slug}`}
+                key={mat.id}
+                className="flex items-center justify-between gap-3 bg-[var(--surface)] hover:bg-[var(--surface-raised)] border border-white/5 hover:border-[var(--accent)] rounded-xl p-3.5 transition-all group hover:scale-[1.02]"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-11 h-11 rounded-lg bg-black/40 relative overflow-hidden flex items-center justify-center p-1 border border-white/5 shrink-0">
+                    {mat.image ? (
+                      <img
+                        src={mat.image}
+                        alt={mat.name}
+                        className="w-full h-full object-contain drop-shadow"
+                      />
+                    ) : (
+                      <span className="font-bold text-xs text-[var(--accent)]">
+                        {mat.name.slice(0, 2).toUpperCase()}
+                      </span>
+                    )}
+                  </div>
+                  <div className="truncate">
+                    <strong className="text-sm block text-[var(--text-light)] group-hover:text-[var(--accent)] truncate">
+                      {mat.name}
+                    </strong>
+                    <small className="text-xs text-[var(--text-muted)] capitalize">
+                      {mat.kind}
+                    </small>
+                  </div>
+                </div>
+
+                <div className="text-right shrink-0 pl-2">
+                  <span className="text-xs text-[var(--text-muted)] block">Required</span>
+                  <strong className="text-base font-extrabold text-[var(--accent)] font-mono">
+                    ×{mat.count}
+                  </strong>
+                </div>
+              </Link>
+            ))}
+
+            {displayedAscMaterials.length === 0 && (
+              <div className="col-span-full p-8 text-center text-xs text-[var(--text-muted)]">
+                No materials recorded for this stage.
+              </div>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div>
+          {/* Talent Level Selector */}
+          <div className="flex flex-wrap items-center gap-2 mb-6">
+            <span className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider mr-1">
+              Select Talent Rank:
+            </span>
+            <button
+              onClick={() => setSelectedTalentLevel("all")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                selectedTalentLevel === "all"
+                  ? "bg-[var(--green)] text-[#0a110f] font-bold shadow-[0_0_12px_rgba(98,213,163,0.25)]"
+                  : "bg-[var(--surface-raised)] text-[var(--text-2)] hover:text-white hover:border-white/20 border border-white/5"
+              }`}
+            >
+              Total Single Skill (Lvl 1 → 10)
+            </button>
+            {talentLevels.map((lvl) => (
+              <button
+                key={lvl.level}
+                onClick={() => setSelectedTalentLevel(lvl.level)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                  selectedTalentLevel === lvl.level
+                    ? "bg-[var(--green)] text-[#0a110f] font-bold shadow-[0_0_12px_rgba(98,213,163,0.25)]"
+                    : "bg-[var(--surface-raised)] text-[var(--text-2)] hover:text-white hover:border-white/20 border border-white/5"
+                }`}
+              >
+                {lvl.levelText}
+              </button>
+            ))}
+          </div>
+
+          {/* Talent Material Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+            {displayedTalentMaterials.map((mat) => (
+              <Link
+                href={`${materialHrefPrefix}/${mat.slug}`}
+                key={mat.id}
+                className="flex items-center justify-between gap-3 bg-[var(--surface)] hover:bg-[var(--surface-raised)] border border-white/5 hover:border-[var(--accent)] rounded-xl p-3.5 transition-all group hover:scale-[1.02]"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-11 h-11 rounded-lg bg-black/40 relative overflow-hidden flex items-center justify-center p-1 border border-white/5 shrink-0">
+                    {mat.image ? (
+                      <img
+                        src={mat.image}
+                        alt={mat.name}
+                        className="w-full h-full object-contain drop-shadow"
+                      />
+                    ) : (
+                      <span className="font-bold text-xs text-[var(--accent)]">
+                        {mat.name.slice(0, 2).toUpperCase()}
+                      </span>
+                    )}
+                  </div>
+                  <div className="truncate">
+                    <strong className="text-sm block text-[var(--text-light)] group-hover:text-[var(--accent)] truncate">
+                      {mat.name}
+                    </strong>
+                    <small className="text-xs text-[var(--text-muted)] capitalize">
+                      {mat.kind}
+                    </small>
+                  </div>
+                </div>
+
+                <div className="text-right shrink-0 pl-2">
+                  <span className="text-xs text-[var(--text-muted)] block">Required</span>
+                  <strong className="text-base font-extrabold text-[var(--accent)] font-mono">
+                    ×{mat.count}
+                  </strong>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

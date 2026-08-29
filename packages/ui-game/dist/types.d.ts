@@ -16,7 +16,7 @@ export interface DrawerSection {
     items: DrawerItem[];
 }
 export interface EntityPreview {
-    id: number;
+    id: number | string;
     kind: string;
     slug: string;
     name: string;
@@ -25,6 +25,7 @@ export interface EntityPreview {
     image: string | null;
     rarity: number | null;
     element: string | null;
+    path?: string | null;
 }
 export interface EntityResponse {
     items: EntityPreview[];
@@ -41,5 +42,33 @@ export interface HealthInfo {
     gameVersion?: string | null;
     phaseLabel?: string | null;
     entityCount?: number;
+}
+export interface MaterialItem {
+    id: string;
+    slug: string;
+    name: string;
+    kind: string;
+    image?: string | null;
+    count: number;
+}
+export interface AscensionPhase {
+    phase: number;
+    levelRange: string;
+    credits?: number;
+    mora?: number;
+    materials: MaterialItem[];
+}
+export interface TalentLevel {
+    level: number;
+    levelText: string;
+    materials: MaterialItem[];
+}
+export interface TagItem {
+    label: string;
+    icon?: React.ReactNode;
+}
+export interface FactItem {
+    label: string;
+    value: React.ReactNode;
 }
 //# sourceMappingURL=types.d.ts.map

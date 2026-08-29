@@ -10,6 +10,9 @@ Shared UI package for game knowledge base and data exploration applications (e.g
 * **`MobileBottomNav`**: Mobile bottom bar and expandable overlay drawer sheet.
 * **`DatabaseShell`**: Standardized database section header layout with eyebrow, title, and description.
 * **`EntityExplorer`**: Searchable and paginated entity catalog with rarity badges, category pills, mobile-optimized pagination, and responsive grid.
+* **`EntityHero`**: Cinematic detail page hero header with dynamic artwork rendering, stars, element/path badges, and background orbits.
+* **`FactsGrid`**: Telemetry and specification grid cards for canonical entities.
+* **`ProgressionCalculator`**: Interactive ascension & talent progression calculator with exact farming material quotas.
 * **`KnowledgeConsole`**: Multi-hop entity and farming relation graph console.
 * **`KnowledgeStatus`**: Auto-polling service telemetry pill for `/api/health`.
 * **`Icon`** / **`BrandMark`**: Canonical SVG icon system and brand marks.

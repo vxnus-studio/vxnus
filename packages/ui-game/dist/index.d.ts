@@ -1,7 +1,10 @@
 export * from "./types";
 export * from "./components/navigation";
-export * from "./components/knowledge-status";
 export * from "./components/database-shell";
 export * from "./components/entity-explorer";
 export * from "./components/knowledge-console";
+export * from "./components/knowledge-status";
+export * from "./components/entity-hero";
+export * from "./components/facts-grid";
+export * from "./components/progression-calculator";
 //# sourceMappingURL=index.d.ts.map
