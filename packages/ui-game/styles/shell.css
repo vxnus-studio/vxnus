@@ -406,6 +406,60 @@
   grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
 }
 
+.entity-card {
+  background: rgba(14, 24, 21, 0.6);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.entity-card:hover {
+  border-color: rgba(98, 213, 163, 0.3);
+  transform: translateY(-2px);
+}
+
+.entity-card-mark {
+  aspect-ratio: 1;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--line);
+  color: var(--green-2);
+  display: flex;
+  font-family: ui-monospace, monospace;
+  font-size: 16px;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.entity-card-mark img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.entity-card-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 12px;
+}
+
+.entity-card-info h2 {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  text-align: left;
+}
+
 .data-error {
   background: rgba(185, 73, 73, 0.09);
   border: 1px solid rgba(218, 103, 103, 0.15);
@@ -637,11 +691,261 @@
   margin: 12px 2px 0;
 }
 
+/* Individual Entity Detail Layout */
+.character-detail-page {
+  --banner-gold: var(--gold, #f5a623);
+  padding-bottom: 35px;
+}
+
+.character-detail-hero {
+  background:
+    radial-gradient(circle at 76% 68%, rgba(98, 213, 163, 0.17), transparent 29%),
+    linear-gradient(120deg, var(--surface, #111d19), var(--bg, #0b1512));
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  min-height: 440px;
+  overflow: hidden;
+  padding: 70px 53px 42px;
+  position: relative;
+}
+
+.character-detail-hero::before {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 28px 28px;
+  content: "";
+  inset: 0;
+  mask-image: linear-gradient(90deg, transparent, black);
+  position: absolute;
+}
+
+.banner-back-link {
+  align-items: center;
+  color: var(--text-3);
+  display: flex;
+  font-size: 11px;
+  gap: 5px;
+  left: 46px;
+  position: absolute;
+  top: 22px;
+  text-transform: uppercase;
+  z-index: 5;
+}
+
+.banner-back-link:hover {
+  color: var(--green-2, var(--green, #62d5a3));
+}
+
+.character-detail-copy {
+  max-width: 57%;
+  position: relative;
+  z-index: 4;
+}
+
+.character-stars {
+  color: var(--gold, #e2b96a);
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  margin-top: 25px;
+}
+
+.character-detail-copy h1 {
+  font-size: clamp(45px, 6vw, 76px);
+  letter-spacing: -0.075em;
+  line-height: 0.85;
+  margin: 12px 0 20px;
+}
+
+.character-detail-copy h1 em {
+  color: var(--green-2, var(--green, #62d5a3));
+  display: block;
+  font-size: 0.35em;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  margin-top: 13px;
+}
+
+.character-detail-copy > p {
+  color: var(--text-2);
+  font-size: 12px;
+  line-height: 1.7;
+  max-width: 500px;
+}
+
+.character-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.character-tags span {
+  align-items: center;
+  background: rgba(10, 17, 15, 0.65);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  color: var(--text-2);
+  display: flex;
+  font-size: 11px;
+  gap: 5px;
+  padding: 6px 8px;
+}
+
+.character-tags svg {
+  color: var(--green, #62d5a3);
+}
+
+.character-detail-art {
+  bottom: 0;
+  height: 96%;
+  position: absolute;
+  right: 2%;
+  width: 44%;
+  z-index: 2;
+}
+
+.history-orbit {
+  border: 1px solid rgba(98, 213, 163, 0.16);
+  border-radius: 50%;
+  bottom: 5%;
+  height: 330px;
+  position: absolute;
+  right: 5%;
+  width: 330px;
+}
+
+.history-orbit::before,
+.history-orbit::after {
+  border: 1px dashed rgba(226, 185, 106, 0.12);
+  border-radius: 50%;
+  content: "";
+  inset: 40px;
+  position: absolute;
+}
+
+.history-orbit::after {
+  border-color: rgba(98, 213, 163, 0.1);
+  inset: 88px;
+}
+
+.history-hero-signal {
+  bottom: 16px;
+  display: flex;
+  font: 11px ui-monospace, monospace;
+  justify-content: space-between;
+  left: 19px;
+  position: absolute;
+  right: 19px;
+  text-transform: uppercase;
+  z-index: 5;
+}
+
+.history-hero-signal span {
+  align-items: center;
+  color: var(--text-3);
+  display: flex;
+  gap: 6px;
+}
+
+.history-hero-signal i {
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--green);
+  height: 4px;
+  width: 4px;
+}
+
+.history-hero-signal strong {
+  color: var(--green-2, var(--green, #62d5a3));
+  letter-spacing: 0.1em;
+}
+
+.character-facts {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 9px 0 29px;
+}
+
+.character-facts article {
+  background: rgba(17, 28, 24, 0.75);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  display: flex;
+  flex-direction: column;
+  min-height: 64px;
+  padding: 12px 14px;
+}
+
+.character-facts small {
+  color: var(--text-3);
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.character-facts strong {
+  font-size: 12px;
+  margin-top: 7px;
+}
+
+.character-bottom-grid {
+  display: grid;
+  gap: 9px;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 28px;
+}
+
+.character-bottom-grid > article {
+  background: rgba(17, 28, 24, 0.7);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.character-bottom-grid h2 {
+  font-size: 19px;
+  margin: 12px 0 16px;
+}
+
+.voice-list {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.voice-list span {
+  background: #0d1714;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.voice-list strong {
+  font-size: 11px;
+}
+
 /* Responsive Shell Breakpoints */
 @media (max-width: 1050px) {
   .content-wrap {
     padding-left: 24px;
     padding-right: 24px;
+  }
+  .character-facts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .character-detail-copy {
+    max-width: 63%;
+  }
+  .character-detail-art {
+    opacity: 0.75;
+    right: -3%;
+    width: 48%;
   }
 }
 
