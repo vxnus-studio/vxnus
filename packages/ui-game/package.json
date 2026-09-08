@@ -1,12 +1,12 @@
 {
   "name": "@vxnus/ui-game",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Themeable game UI and chrome components for VXNUS game knowledge bases",
   "type": "module",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vxnuslabs/vxnus.git",
+    "url": "git+https://github.com/vxnus-studio/vxnus.git",
     "directory": "packages/ui-game"
   },
   "main": "./dist/index.js",
