@@ -1,51 +1,65 @@
 # VXNUS
 
-VXNUS is a technology creative studio. The public site presents the studio, its work, and its findings. The private admin workspace maintains that content.
+VXNUS is a creative technology studio exploring artificial intelligence, intelligent characters, and interactive systems. The public site presents the studio, its work, and research findings, with a private admin workspace for editorial operations.
 
-## Development
+## Tech Stack
+
+- **Framework:** Next.js (App Router) & React 19
+- **Database:** Neon Serverless PostgreSQL with Drizzle ORM
+- **Authentication:** Neon Auth
+- **Styling:** Tailwind CSS
+- **Monorepo:** npm workspaces (`packages/ui-game`)
+
+## Development Setup
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Configure environment:**
+   Copy `.env.example` to `.env.local` and set your credentials:
+   ```bash
+   cp .env.example .env.local
+   ```
+   Required variables:
+   - `NEXT_PUBLIC_SITE_URL`: Canonical site URL (e.g. `http://localhost:3000`)
+   - `DATABASE_URL`: Neon PostgreSQL connection string
+   - `NEXT_PUBLIC_NEON_AUTH_BASE_URL`: Neon Auth API URL
+   - `NEON_AUTH_BASE_URL`: Neon Auth API URL (server-side)
+   - `NEON_AUTH_COOKIE_SECRET`: 32-character random session secret
+
+3. **Database initialization:**
+   ```bash
+   # Push schema to database
+   npm run db:push
+
+   # Push schema and seed profile data
+   npm run db:setup
+   ```
+
+4. **Create admin user:**
+   ```bash
+   npm run user:create <email> <password> [name]
+   ```
+
+5. **Start development server:**
+   ```bash
+   npm run dev
+   ```
+   Open `http://localhost:3000` for the public site, or `/admin/login` for the editorial dashboard.
+
+## Workspaces & Packages
+
+- `packages/ui-game`: Themeable game UI and knowledge chrome components (`@vxnus/ui-game`).
+  ```bash
+  npm run build:packages
+  ```
+
+## Quality Checks
 
 ```bash
-npm install
-npm run dev
+npm run lint       # Run ESLint
+npx tsc --noEmit   # Type check
+npm run build      # Production build
 ```
-
-Open `http://localhost:3000`.
-
-Quality checks:
-
-```bash
-npm run lint
-npx tsc --noEmit
-npm run build
-```
-
-## Data and D1
-
-The application uses Drizzle ORM with Cloudflare D1/SQLite.
-
-```bash
-npm run db:generate
-npm run db:setup
-```
-
-`db:setup` applies migrations to local D1 and loads the seed file. The remote migration command is intentionally separate:
-
-```bash
-npm run db:migrate:remote
-```
-
-Replace the placeholder `database_id` in `wrangler.toml` before using the remote command.
-
-## Admin workspace
-
-Set these environment variables:
-
-```bash
-NEXT_PUBLIC_SITE_URL=https://vxnus.krzgn.xyz
-ADMIN_PASSWORD=...
-ADMIN_SESSION_SECRET=...
-```
-
-Then visit `/admin/login`. The deployed runtime must expose the Cloudflare D1 binding as `DB` for mutations.
-
-See the phase documentation in `docs/` for the content model, editorial rules, deployment notes, and release checklist.
