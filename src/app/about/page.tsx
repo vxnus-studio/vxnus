@@ -21,6 +21,15 @@ export default async function AboutPage() {
           <p className="reading-copy">{profile.introduction}</p>
         </section>
         <section>
+          <h2>The Name</h2>
+          <p className="reading-copy">
+            <strong>VXNUS</strong> is pronounced as <em>Venus</em> (/ˈviːnəs/). The name is
+            associated with <strong>Inanna</strong>, the ancient Sumerian goddess of love,
+            beauty, and warfare, who was historically personified by the planet Venus as both
+            the morning and evening star.
+          </p>
+        </section>
+        <section>
           <h2>What We Explore</h2>
           <p className="reading-copy">
             Products are one outcome of research, not the goal itself. We work across software,
