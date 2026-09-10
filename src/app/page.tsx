@@ -10,6 +10,7 @@ import { createMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata = createMetadata({
+  title: "VXNUS Creative Technology Studio",
   description: site.description,
   path: "/",
 });
