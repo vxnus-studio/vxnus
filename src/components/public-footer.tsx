@@ -7,8 +7,8 @@ export function PublicFooter() {
   return (
     <footer className="public-footer">
       <div>
-        <p className="footer-mark" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Image src="/logo.svg" alt="" width={24} height={24} style={{ display: 'block', height: '1em', width: 'auto' }} />
+        <p className="footer-mark" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+          <Image src="/logo.svg" alt="" width={32} height={32} style={{ display: 'block', height: '1.4em', width: 'auto' }} />
           VXNUS
         </p>
         <p>Technology Creative Studio.</p>
@@ -29,7 +29,16 @@ export function PublicFooter() {
           </a>
         </div>
       </div>
-      <p className="footer-copyright">© VXNUS Studio</p>
+      <div className="footer-copyright">
+        <p>© VXNUS Studio</p>
+        <a
+          href="https://creativecommons.org/licenses/by-nc/4.0/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          CC BY-NC 4.0
+        </a>
+      </div>
     </footer>
   );
 }
