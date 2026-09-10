@@ -1,65 +1,35 @@
 # VXNUS
 
-VXNUS is a creative technology studio exploring artificial intelligence, intelligent characters, and interactive systems. The public site presents the studio, its work, and research findings, with a private admin workspace for editorial operations.
+> **Trying the untried and finishing the unfinished.**
 
-## Tech Stack
+VXNUS is a creative technology studio dedicated to exploring the frontiers of artificial intelligence, intelligent characters, AI companions, and interactive systems.
 
-- **Framework:** Next.js (App Router) & React 19
-- **Database:** Neon Serverless PostgreSQL with Drizzle ORM
-- **Authentication:** Neon Auth
-- **Styling:** Tailwind CSS
-- **Monorepo:** npm workspaces (`packages/ui-game`)
+---
 
-## Development Setup
+## What is VXNUS?
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+VXNUS operates at the intersection of imagination and engineering. The studio researches, designs, and builds digital entities and software systems that push the boundaries of human-AI interaction.
 
-2. **Configure environment:**
-   Copy `.env.example` to `.env.local` and set your credentials:
-   ```bash
-   cp .env.example .env.local
-   ```
-   Required variables:
-   - `NEXT_PUBLIC_SITE_URL`: Canonical site URL (e.g. `http://localhost:3000`)
-   - `DATABASE_URL`: Neon PostgreSQL connection string
-   - `NEXT_PUBLIC_NEON_AUTH_BASE_URL`: Neon Auth API URL
-   - `NEON_AUTH_BASE_URL`: Neon Auth API URL (server-side)
-   - `NEON_AUTH_COOKIE_SECRET`: 32-character random session secret
+### Core Principles
 
-3. **Database initialization:**
-   ```bash
-   # Push schema to database
-   npm run db:push
+- **Try the untried:** Exploring novel paradigms and uncharted territory in technology and digital interaction.
+- **Finish the unfinished:** Turning ambitious experimental concepts into tangible, functional reality.
+- **Breathe life into digital entities:** Creating characters and companions with depth, responsiveness, and personality.
+- **Merge imagination with intelligent systems:** Combining creative storytelling and aesthetics with artificial intelligence.
+- **Push the boundaries of AI interaction:** Experimenting with how people communicate, collaborate, and connect with intelligent systems.
 
-   # Push schema and seed profile data
-   npm run db:setup
-   ```
+---
 
-4. **Create admin user:**
-   ```bash
-   npm run user:create <email> <password> [name]
-   ```
+## Featured Projects
 
-5. **Start development server:**
-   ```bash
-   npm run dev
-   ```
-   Open `http://localhost:3000` for the public site, or `/admin/login` for the editorial dashboard.
+### [Siduri (Siduri-X)](https://github.com/vxnus-studio/siduri-x)
+An intelligent AI companion framework designed with **persistent, authoritative memory**, atomic behavioral gating, and modular capability organs (`@siduri-x/*`). Built as a local-first, single-owner companion that learns, remembers, and evolves over time through real interaction without pre-scripted personas.
 
-## Workspaces & Packages
+---
 
-- `packages/ui-game`: Themeable game UI and knowledge chrome components (`@vxnus/ui-game`).
-  ```bash
-  npm run build:packages
-  ```
+## Areas of Focus & Work
 
-## Quality Checks
-
-```bash
-npm run lint       # Run ESLint
-npx tsc --noEmit   # Type check
-npm run build      # Production build
-```
+- **AI Companions & Intelligent Characters:** Autonomous, contextual, and adaptive agents crafted for rich interpersonal interactions.
+- **Interactive Systems & Game UI:** Immersive, themeable user interfaces and responsive digital spaces.
+- **Applied Research & Experiments:** Exploring emerging AI models, agentic architectures, multi-modal interfaces, and novel tooling.
+- **Software & Open Tools:** Building foundational libraries, packages, and frameworks for creative technologists and builders.
