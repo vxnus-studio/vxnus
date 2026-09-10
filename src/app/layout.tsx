@@ -10,6 +10,12 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description: site.description,
+  alternates: {
+    canonical: "/",
+    types: {
+      "application/rss+xml": "/feed.xml",
+    },
+  },
   openGraph: {
     title: "VXNUS Creative Technology Studio",
     description: site.description,
@@ -17,11 +23,20 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: `${site.name} — Creative Technology Studio`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "VXNUS Creative Technology Studio",
     description: site.description,
+    images: ["/twitter-image.png"],
   },
   robots: {
     index: true,

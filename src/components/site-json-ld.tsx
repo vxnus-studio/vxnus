@@ -8,6 +8,12 @@ export function SiteJsonLd() {
       name: site.name,
       description: site.description,
       url: site.url,
+      logo: `${site.url}/logo.png`,
+      image: `${site.url}/opengraph-image.png`,
+      sameAs: [
+        site.github.url,
+        site.founder.url,
+      ],
       founder: {
         "@type": "Person",
         name: site.founder.name,
@@ -21,6 +27,7 @@ export function SiteJsonLd() {
       name: site.name,
       description: site.description,
       url: site.url,
+      inLanguage: "en",
     },
   ];
 

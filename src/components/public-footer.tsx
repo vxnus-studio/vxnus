@@ -17,6 +17,7 @@ export function PublicFooter() {
         <span>Article is the beginning of better products.</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
           <Link href="/about">About the studio</Link>
+          <a href="/feed.xml" target="_blank" rel="noopener noreferrer">RSS Feed</a>
           <a
             href={site.github.url}
             target="_blank"

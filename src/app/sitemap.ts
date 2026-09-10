@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
 
-import { getPublicArticleSlugs, getPublicTopics, getPublicWork } from "@/lib/content";
+import { getPublicArticle, getPublicTopics, getPublicWork } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  const slugs = await getPublicArticleSlugs();
+  const articles = await getPublicArticle();
   const topics = await getPublicTopics();
   const works = await getPublicWork();
   const staticRoutes = ["/", "/about", "/article", "/topics", "/open-source", "/projects"];
@@ -17,9 +17,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: path === "/" ? 1 : 0.7,
     })),
-    ...slugs.map((slug) => ({
-      url: new URL(`/article/${slug}`, site.url).toString(),
-      lastModified: now,
+    ...articles.map((article) => ({
+      url: new URL(`/article/${article.slug}`, site.url).toString(),
+      lastModified: article.publishedAt ?? now,
       changeFrequency: "yearly" as const,
       priority: 0.8,
     })),
