@@ -11,12 +11,17 @@ export function HomeJsonLd({ profile }: { profile: PublicProfile }) {
         name: profile.name,
         description: profile.introduction,
         url: site.url,
-        logo: `${site.url}/apple-icon.png`,
-        sameAs: [site.github.url],
+        logo: `${site.url}/logo.png`,
+        image: `${site.url}/opengraph-image.png`,
+        sameAs: [
+          site.github.url,
+          site.founder.url,
+        ],
         founder: {
           "@type": "Person",
           name: site.founder.name,
           url: site.founder.url,
+          sameAs: [site.founder.url],
         },
       },
       {

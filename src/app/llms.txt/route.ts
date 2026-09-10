@@ -1,14 +1,41 @@
-import { getPublicArticle } from "@/lib/content";
+import { getPublicArticle, getPublicWork } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export async function GET() {
-  const articles = await getPublicArticle();
-  const article = articles
-    .map(
-      (article) =>
-        `- [${article.title}](${site.url}/article/${article.slug}): ${article.summary}`,
-    )
-    .join("\n");
+  const [articles, work] = await Promise.all([
+    getPublicArticle(),
+    getPublicWork(),
+  ]);
+
+  const openSource = work.filter((w) => w.type === "open_source");
+  const projects = work.filter((w) => w.type === "project");
+
+  const articleSection = articles.length > 0
+    ? articles
+        .map(
+          (article) =>
+            `- [${article.title}](${site.url}/article/${article.slug}): ${article.summary}`,
+        )
+        .join("\n")
+    : "- No research articles published yet.";
+
+  const openSourceSection = openSource.length > 0
+    ? openSource
+        .map(
+          (w) =>
+            `- [${w.title}](${site.url}/open-source/${w.slug}): ${w.summary}${w.repositoryUrl ? ` (Repo: ${w.repositoryUrl})` : ""}`,
+        )
+        .join("\n")
+    : "- No open-source projects published yet.";
+
+  const projectsSection = projects.length > 0
+    ? projects
+        .map(
+          (w) =>
+            `- [${w.title}](${site.url}/projects/${w.slug}): ${w.summary}${w.externalUrl ? ` (URL: ${w.externalUrl})` : ""}`,
+        )
+        .join("\n")
+    : "- No products or validated projects published yet.";
 
   const body = `# ${site.name}
 
@@ -25,9 +52,17 @@ ${site.name} is a Technology Creative Studio. It focuses on trying the untried a
 - [Open source](${site.url}/open-source): Open-source tools and systems.
 - [Projects](${site.url}/projects): Validated work and products.
 
-## Article
+## Research & Articles
 
-${article}
+${articleSection}
+
+## Open Source
+
+${openSourceSection}
+
+## Projects & Validated Work
+
+${projectsSection}
 
 ## Machine-readable feeds
 
