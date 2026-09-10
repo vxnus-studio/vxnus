@@ -40,6 +40,7 @@ export function ArticleJsonLd({ article }: { article: PublicArticleArticle }) {
         timeRequired: `PT${article.readingTimeMinutes}M`,
         inLanguage: "en",
         isAccessibleForFree: true,
+        license: "https://creativecommons.org/licenses/by-nc/4.0/",
       },
       {
         "@type": "BreadcrumbList",

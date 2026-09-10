@@ -77,8 +77,21 @@ export default async function ArticleArticlePage({ params }: ArticleArticlePageP
         </div>
 
         <footer className="article-footer">
-          <span>Article ID / {article.articleId}</span>
-          <span>Updated / {formatDate(article.updatedAt)}</span>
+          <div className="article-footer-meta">
+            <span>Article ID / {article.articleId}</span>
+            <span>Updated / {formatDate(article.updatedAt)}</span>
+          </div>
+          <p className="article-footer-license">
+            Unless otherwise stated, this article is licensed under the{" "}
+            <a
+              href="https://creativecommons.org/licenses/by-nc/4.0/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)
+            </a>
+            .
+          </p>
         </footer>
 
         <ArticleRelated articles={related} />
