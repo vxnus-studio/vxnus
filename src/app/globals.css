@@ -2007,3 +2007,145 @@ a {
   background: rgba(255, 255, 255, 0.06);
 }
 
+
+/* ==========================================================================
+   VXNUS WEBRING SECTION
+   ========================================================================== */
+.public-footer-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.vxnus-webring-section {
+  border-top: 1px solid var(--line);
+  padding: 2.2rem 0 2rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.vxnus-webring-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.vxnus-webring-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.vxnus-webring-kicker {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.vxnus-webring-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.vxnus-webring-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.vxnus-webring-btn {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.vxnus-webring-btn:hover {
+  color: var(--foreground);
+  border-color: var(--foreground);
+  background: var(--panel);
+}
+
+.vxnus-webring-join {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-left: 0.5rem;
+  text-decoration: none;
+  border-bottom: 1px solid var(--foreground);
+  padding-bottom: 1px;
+}
+
+.vxnus-webring-join:hover {
+  opacity: 0.7;
+}
+
+.vxnus-webring-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.vxnus-webring-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.vxnus-badge-link {
+  display: inline-block;
+  width: 88px;
+  height: 31px;
+  border-radius: 1px;
+  overflow: hidden;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.vxnus-badge-link:hover {
+  transform: translateY(-1px);
+  filter: contrast(1.15);
+}
+
+.vxnus-badge-img {
+  width: 88px;
+  height: 31px;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.vxnus-webring-ticker {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--muted);
+  min-height: 1.5rem;
+}
+
+.vxnus-webring-ticker p {
+  margin: 0;
+}
+
+.vxnus-ticker-highlight {
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+.vxnus-ticker-muted {
+  color: var(--muted);
+}

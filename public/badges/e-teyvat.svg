@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="88" height="31" viewBox="0 0 88 31" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      .teyvat-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace, sans-serif; font-size: 8px; font-weight: 800; letter-spacing: 0.8px; }
+      .teyvat-sub { font-family: monospace, "Courier New", sans-serif; font-size: 5.5px; letter-spacing: 1.2px; font-weight: 700; }
+    </style>
+    <linearGradient id="anemoGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#66d9a7" />
+      <stop offset="100%" stop-color="#28765a" />
+    </linearGradient>
+  </defs>
+
+  <!-- Border & E-Teyvat Deep Green-Black Canvas -->
+  <rect x="0" y="0" width="88" height="31" fill="#0a110f" stroke="#1b2e25" stroke-width="1" />
+  <rect x="1" y="1" width="86" height="1" fill="#62d5a3" opacity="0.35" />
+  
+  <!-- Left Hex/Diamond Box -->
+  <rect x="2" y="2" width="23" height="27" fill="#111c18" />
+
+  <!-- E-Teyvat Official Diamond Logo & Cross Shape -->
+  <g transform="translate(13.5, 15.5) scale(0.6)">
+    <rect x="-11" y="-11" width="22" height="22" rx="4" fill="url(#anemoGlow)" transform="rotate(45)" />
+    <rect x="-8" y="-8" width="16" height="16" rx="3" fill="none" stroke="#061c14" stroke-width="0.8" transform="rotate(45)" />
+    <rect x="-1" y="-5" width="2" height="10" fill="#d9f8e9" />
+    <rect x="-5" y="-1" width="10" height="2" fill="#d9f8e9" />
+  </g>
+
+  <!-- Divider -->
+  <line x1="25" y1="2" x2="25" y2="29" stroke="#1b2e25" />
+
+  <!-- Right Side Content -->
+  <text x="29" y="12" fill="#eff7f3" class="teyvat-title">E-TEYVAT</text>
+  <rect x="29" y="16" width="53" height="10" fill="#16231e" stroke="#253e32" stroke-width="1" rx="1" />
+  <text x="32" y="23.5" fill="#62d5a3" class="teyvat-sub">ARCHIVE</text>
+  <circle cx="76" cy="21" r="1.8" fill="#e2b96a" />
+</svg>
